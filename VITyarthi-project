@@ -1,0 +1,47 @@
+import time
+import random
+
+class MotionSensor:
+    def detect_motion(self):
+        # Randomly simulate someone entering or leaving
+        return random.choice([True, False])
+
+class LightSystem:
+    def __init__(self):
+        self.light_on = False
+
+    def turn_on(self):
+        if not self.light_on:
+            self.light_on = True
+            print("Light turned ON")
+
+    def turn_off(self):
+        if self.light_on:
+            self.light_on = False
+            print("Light turned OFF")
+
+class Controller:
+    def __init__(self, sensor, light):
+        self.sensor = sensor
+        self.light = light
+
+    def run(self):
+        print("Starting Smart Classroom Energy Saver Simulation...\n")
+
+        for _ in range(10):
+            motion = self.sensor.detect_motion()
+
+            if motion:
+                print("Motion detected → Classroom occupied")
+                self.light.turn_on()
+            else:
+                print("No motion → Classroom empty")
+                self.light.turn_off()
+
+            time.sleep(1)
+
+sensor = MotionSensor()
+light = LightSystem()
+controller = Controller(sensor, light)
+
+controller.run()
